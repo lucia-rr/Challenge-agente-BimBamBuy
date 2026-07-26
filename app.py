@@ -7,13 +7,60 @@ st.set_page_config(page_title="BimBam Buy - Soporte", page_icon="🛒", layout="
 
 st.markdown("""
 <style>
+
+.stApp {
+    background-color: #0e1117;
+}
+
+
 footer {visibility: hidden;}
-.stApp {background-color: #1e291c;}
-.stMarkdown, .stMarkdown p, .stMarkdown li, .stChatMessageContent {
+
+.stMarkdown, .stMarkdown p, .stMarkdown li {
     color: #E0E0E0 !important;
     font-size: 16px !important;
 }
+
+
 h1 { color: #FFFFFF !important; }
+
+
+[data-testid="stChatAvatar"] {
+    display: none !important;
+}
+
+
+div[data-testid="stChatInput"] {
+    background-color: #1a1d23 !important;
+    border: 1px solid #333 !important;
+    border-radius: 8px !important;
+}
+
+div[data-testid="stChatInput"] textarea {
+    background-color: transparent !important;
+    color: #E0E0E0 !important;
+}
+
+
+.stChatMessage[data-testid="stChatMessage"]:nth-child(even) {
+    background-color: #1a1d23 !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+}
+
+
+.stChatMessage[data-testid="stChatMessage"]:nth-child(odd) {
+    background-color: #0e1117 !important;
+}
+
+
+.stChatMessage {
+    border: none !important;
+}
+
+
+hr {
+    border-color: #333 !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
