@@ -7,8 +7,19 @@ st.set_page_config(page_title="BimBam Buy - Soporte", page_icon="🛒", layout="
 
 st.markdown("""
 <style>
-/* Fondo oscuro global */
-.stApp {
+/* Fondo oscuro global en TODOS los contenedores */
+.stApp, 
+.stApp > header,
+.stApp > div,
+.stApp > main,
+.stApp > footer,
+[data-testid="stAppViewContainer"],
+[data-testid="stHeader"],
+[data-testid="stSidebar"],
+.stChatInputContainer,
+.stChatInputContainer > div,
+[data-testid="stBottomBlock"],
+[data-testid="stBottomBlock"] > div {
     background-color: #0e1117 !important;
 }
 
@@ -24,7 +35,7 @@ footer {visibility: hidden !important;}
 /* Encabezados en blanco */
 h1 { color: #FFFFFF !important; }
 
-/* FORZAR fondo oscuro en el chat input */
+/* Chat input con fondo oscuro */
 div[data-testid="stChatInput"] {
     background-color: #1a1d23 !important;
     border: 1px solid #333 !important;
@@ -34,10 +45,6 @@ div[data-testid="stChatInput"] {
 div[data-testid="stChatInput"] textarea {
     background-color: transparent !important;
     color: #E0E0E0 !important;
-}
-
-div[data-testid="stChatInput"] button {
-    background-color: #333 !important;
 }
 
 /* Mensajes sin bordes ni franjas blancas */
