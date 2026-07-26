@@ -1,7 +1,7 @@
 import streamlit as st
 from src.consulta import obtener_respuesta
 
-st.set_page_config(page_title="BimBam Buy - Soporte", page_icon="", layout="centered")
+st.set_page_config(page_title="BimBam Buy - Soporte", page_icon="🛒", layout="centered")
 
 
 st.markdown("""
@@ -80,16 +80,17 @@ Puedo apoyarte con información sobre:
 ¿En qué puedo ayudarte hoy?"""
     st.session_state.messages.append({"role": "assistant", "content": bienvenida})
 
+
 for message in st.session_state.messages:
-    with st.chat_message(message["role"], avatar=""):
+    with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
 if pregunta := st.chat_input("¿En qué duda puedo ayudarte en BimBam Buy?"):
     st.session_state.messages.append({"role": "user", "content": pregunta})
-    with st.chat_message("user", avatar=""):
+    with st.chat_message("user"):
         st.markdown(pregunta)
     
-    with st.chat_message("assistant", avatar=""):
+    with st.chat_message("assistant"):
         with st.spinner("Buscando información..."):
             respuesta = obtener_respuesta(pregunta)
             st.markdown(respuesta)
