@@ -1,0 +1,10 @@
+python-dotenv
+langchain
+langchain-community
+langchain-cohere
+langchain-text-splitters
+langchain-classic
+faiss-cpu
+cohere
+pypdf
+streamlit
