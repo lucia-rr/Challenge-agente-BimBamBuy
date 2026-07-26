@@ -1,42 +1,40 @@
 import streamlit as st
 from src.consulta import obtener_respuesta
 
-
-st.set_page_config(page_title="BimBam Buy - Soporte", page_icon="🛒", layout="centered")
-
+st.set_page_config(page_title="BimBam Buy - Soporte", page_icon="", layout="centered")
 
 st.markdown("""
 <style>
-/* Fondo oscuro global */
+/* Fondo blanco global */
 .stApp {
-    background-color: #0e1117;
+    background-color: #ffffff !important;
 }
 
 /* Ocultar footer */
-footer {visibility: hidden;}
+footer {visibility: hidden !important;}
 
-/* Texto unificado en gris claro */
-.stMarkdown, .stMarkdown p, .stMarkdown li, .stChatMessageContent p {
-    color: #E0E0E0 !important;
+/* Texto unificado en negro */
+.stMarkdown, .stMarkdown p, .stMarkdown li, .stChatMessageContent p, label, div {
+    color: #1a1a1a !important;
     font-size: 16px !important;
 }
 
-/* Encabezados en blanco */
-h1 { color: #FFFFFF !important; }
+/* Encabezados en negro */
+h1 { color: #000000 !important; }
 
-/* Quitar franjas blancas del chat input */
+/* Chat input con fondo blanco y borde sutil */
 div[data-testid="stChatInput"] {
-    background-color: #1a1d23 !important;
-    border: 1px solid #333 !important;
+    background-color: #ffffff !important;
+    border: 1px solid #cccccc !important;
     border-radius: 8px !important;
 }
 
 div[data-testid="stChatInput"] textarea {
     background-color: transparent !important;
-    color: #E0E0E0 !important;
+    color: #1a1a1a !important;
 }
 
-/* Mensajes sin bordes ni franjas blancas */
+/* Mensajes sin bordes */
 .stChatMessage {
     background-color: transparent !important;
     border: none !important;
@@ -44,19 +42,17 @@ div[data-testid="stChatInput"] textarea {
 
 /* Línea separadora sutil */
 hr {
-    border-color: #333 !important;
+    border-color: #cccccc !important;
 }
 
-/* Ocultar el botón "Share" y otros elementos de la barra superior */
-header {visibility: hidden;}
+/* Ocultar header */
+header {visibility: hidden !important;}
 </style>
 """, unsafe_allow_html=True)
 
-
 st.markdown("<h1 style='text-align: center;'>BimBam Buy</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; font-size: 1.1em; color: #E0E0E0;'>Asistente virtual de soporte para pagos, garantías y postventa.</p>", unsafe_allow_html=True)
-st.markdown("<hr style='border: 0; border-top: 1px solid #333; margin: 20px 0;'>", unsafe_allow_html=True)
-
+st.markdown("<p style='text-align: center; font-size: 1.1em; color: #1a1a1a;'>Asistente virtual de soporte para pagos, garantías y postventa.</p>", unsafe_allow_html=True)
+st.markdown("<hr style='border: 0; border-top: 1px solid #cccccc; margin: 20px 0;'>", unsafe_allow_html=True)
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -72,19 +68,15 @@ Puedo apoyarte con información sobre:
     
     st.session_state.messages.append({"role": "assistant", "content": bienvenida})
 
-
 for message in st.session_state.messages:
     with st.chat_message(message["role"], avatar=None):
         st.markdown(message["content"])
 
-
 if pregunta := st.chat_input("¿En qué duda puedo ayudarte en BimBam Buy?"):
-    
     st.session_state.messages.append({"role": "user", "content": pregunta})
     with st.chat_message("user", avatar=None):
         st.markdown(pregunta)
     
-   
     with st.chat_message("assistant", avatar=None):
         with st.spinner("Buscando información..."):
             respuesta = obtener_respuesta(pregunta)
