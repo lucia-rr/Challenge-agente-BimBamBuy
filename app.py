@@ -3,63 +3,72 @@ from src.consulta import obtener_respuesta
 
 st.set_page_config(page_title="BimBam Buy - Soporte", page_icon="🛒", layout="centered")
 
-
 st.markdown("""
 <style>
-/* Fondo oscuro en TODOS los contenedores posibles */
+/* FONDO OSCURO EN ABSOLUTAMENTE TODOS LOS CONTENEDORES */
 .stApp, 
 .stApp > div,
 [data-testid="stAppViewContainer"],
 [data-testid="stMainBlockContainer"],
 [data-testid="stBottomBlockContainer"],
-.stChatInputContainer,
+[data-testid="stBottomBlock"],
 [data-testid="stChatInputContainer"],
 [data-testid="stChatInputContainer"] > div,
-[data-testid="stBottomBlock"],
-[data-testid="stBottomBlock"] > div,
-[data-testid="stChatInput"] {
+[data-testid="stChatInput"],
+[data-testid="stChatInput"] > div,
+[data-testid="stChatInput"] textarea,
+[data-testid="stChatMessage"],
+[data-testid="stChatMessage"] > div,
+section.main > div,
+div.element-container,
+div.stChatMessage,
+div[data-testid="stVerticalBlock"] {
     background-color: #0e1117 !important;
 }
 
-/* Eliminar avatares completamente */
+/* ELIMINAR AVATARES */
 [data-testid="stChatMessageAvatar"] {
     display: none !important;
-    visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
 }
 
-/* Mensajes sin avatar */
-[data-testid="stChatMessage"] {
-    padding-left: 1rem !important;
-}
-
-/* Chat input sin fondo blanco */
-[data-testid="stChatInput"] textarea {
-    background-color: #1a1d23 !important;
-    color: #E0E0E0 !important;
-}
-
+/* CHAT INPUT SIN BORDES BLANCOS */
 [data-testid="stChatInput"] {
     background-color: #1a1d23 !important;
     border: 1px solid #333 !important;
     border-radius: 8px !important;
 }
 
-/* Texto en gris claro */
+[data-testid="stChatInput"] textarea {
+    background-color: #1a1d23 !important;
+    color: #E0E0E0 !important;
+    border: none !important;
+}
+
+/* TEXTO GRIS CLARO */
 .stMarkdown, .stMarkdown p, .stMarkdown li, .stChatMessageContent p, label, div {
     color: #E0E0E0 !important;
 }
 
-/* Ocultar footer y header */
-footer, header {
-    visibility: hidden !important;
+/* OCULTAR FOOTER Y HEADER */
+footer, header, .st-emotion-cache-1y4h80 {
     display: none !important;
+    visibility: hidden !important;
 }
 
-/* Línea separadora */
-hr {
+/* SIN BORDES */
+hr, .stDivider {
     border-color: #333 !important;
+}
+
+/* ELIMINAR SOMBRAS Y BORDES BLANCOS */
+div[data-testid="stChatInput"] {
+    box-shadow: none !important;
+}
+
+/* CONTENEDOR PRINCIPAL SIN PADDING BLANCO */
+.main .block-container {
+    padding-top: 1rem !important;
+    background-color: #0e1117 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -79,7 +88,6 @@ Puedo apoyarte con información sobre:
 
 ¿En qué puedo ayudarte hoy?"""
     st.session_state.messages.append({"role": "assistant", "content": bienvenida})
-
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
