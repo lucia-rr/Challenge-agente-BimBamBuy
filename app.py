@@ -9,11 +9,11 @@ st.markdown("""
 <style>
 /* Fondo oscuro global */
 .stApp {
-    background-color: #0e1117;
+    background-color: #0e1117 !important;
 }
 
 /* Ocultar footer */
-footer {visibility: hidden;}
+footer {visibility: hidden !important;}
 
 /* Texto unificado en gris claro */
 .stMarkdown, .stMarkdown p, .stMarkdown li, .stChatMessageContent p {
@@ -24,7 +24,7 @@ footer {visibility: hidden;}
 /* Encabezados en blanco */
 h1 { color: #FFFFFF !important; }
 
-/* Quitar franjas blancas del chat input */
+/* FORZAR fondo oscuro en el chat input */
 div[data-testid="stChatInput"] {
     background-color: #1a1d23 !important;
     border: 1px solid #333 !important;
@@ -34,6 +34,10 @@ div[data-testid="stChatInput"] {
 div[data-testid="stChatInput"] textarea {
     background-color: transparent !important;
     color: #E0E0E0 !important;
+}
+
+div[data-testid="stChatInput"] button {
+    background-color: #333 !important;
 }
 
 /* Mensajes sin bordes ni franjas blancas */
@@ -47,8 +51,8 @@ hr {
     border-color: #333 !important;
 }
 
-/* Ocultar el botón "Share" y otros elementos de la barra superior */
-header {visibility: hidden;}
+/* Ocultar la barra superior de Streamlit */
+header {visibility: hidden !important;}
 </style>
 """, unsafe_allow_html=True)
 
