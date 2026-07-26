@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-# Cargar variables de entorno desde .env (para desarrollo local)
+
 load_dotenv()
 
 # Parche para Streamlit Cloud: si existe st.secrets, usarlo como prioridad
@@ -12,21 +12,21 @@ try:
 except Exception:
     pass
 
-# Ahora sí, los imports de LangChain
+
 from langchain_cohere import ChatCohere, CohereEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_classic.chains import create_retrieval_chain
 from langchain_core.prompts import ChatPromptTemplate
 
-# Cargar la base vectorial
+
 embeddings = CohereEmbeddings(model="embed-multilingual-v3.0")
 db = FAISS.load_local("db/faiss_index", embeddings, allow_dangerous_deserialization=True)
 
-# Modelo de lenguaje
+
 llm = ChatCohere(model="command-a-03-2025", temperature=0)
 
-# Prompt para BimBam Buy
+
 prompt = ChatPromptTemplate.from_messages([
     ("system",
      "Eres un asistente experto en soporte al cliente de BimBam Buy. "
@@ -50,7 +50,7 @@ prompt = ChatPromptTemplate.from_messages([
     ("human", "{input}"),
 ])
 
-# Cadena de consulta
+
 document_chain = create_stuff_documents_chain(llm, prompt)
 retriever = db.as_retriever()
 qa_chain = create_retrieval_chain(retriever, document_chain)
@@ -58,7 +58,7 @@ qa_chain = create_retrieval_chain(retriever, document_chain)
 def obtener_respuesta(pregunta):
     return qa_chain.invoke({"input": pregunta})["answer"]
 
-# Modo de prueba en terminal
+
 if __name__ == "__main__":
     print("Agente de BimBam Buy listo (Cohere). Escriba 'salir' para terminar.\n")
     while True:
